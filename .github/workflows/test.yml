@@ -7,6 +7,12 @@ on:
         description: "Enable debug option"
         type: boolean
         required: false
+  workflow_call:
+    inputs:
+      debug:
+        description: "Enable debug option"
+        type: boolean
+        required: false
 
 jobs:
 
