@@ -15,12 +15,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+
+      - name: input value
+        run: echo "${{github.event.inputs.debug}}"
+
       - name: run test
-        if: ${{ !github.event.inputs.debug }}
+        if: ${{ github.event.inputs.debug == false }}
         run: echo "RUN normal"
       
       - name: run test (DEBUG)
-        if: ${{ !github.event.inputs.debug }}
+        if: ${{ github.event.inputs.debug == true}}
         run: echo "RUN with DEBUG"
     
 
