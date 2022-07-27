@@ -8,7 +8,12 @@ on:
         type: boolean
         required: false
         default: false
-  workflow_call
+  workflow_call:
+    inputs:
+      debug:
+        type: boolean
+        required: false
+        default: false
 
 jobs:
 
@@ -19,14 +24,14 @@ jobs:
 
 
       - name: input value
-        run: echo "${{github.event.inputs.debug}}"
+        run: echo "${{inputs.debug}}"
 
       - name: run test
-        if: ${{ github.event.inputs.debug == 'false' }}
+        if: ${{ inputs.debug == 'false' }}
         run: echo "RUN normal"
       
       - name: run test (DEBUG)
-        if: ${{ github.event.inputs.debug == 'true'}}
+        if: ${{ inputs.debug == 'true'}}
         run: echo "RUN with DEBUG"
     
 
