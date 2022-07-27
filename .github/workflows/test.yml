@@ -1,3 +1,28 @@
+name: "SDK unit tests and lint"
+
+on:
+  workflow_dispatch:
+    inputs:
+      debug:
+        description: "Enable debug option"
+        type: boolean
+        required: false
+
+jobs:
+
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: run test
+        if: ${{ !github.event.inputs.debug }}
+        run: echo "RUN normal"
+      
+      - name: run test (DEBUG)
+        if: ${{ !github.event.inputs.debug }}
+        run: echo "RUN with DEBUG"
+    
 
 
 
