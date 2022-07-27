@@ -24,14 +24,14 @@ jobs:
 
 
       - name: input value
-        run: echo "${{inputs.debug}}"
+        run: echo "${{github.event.inputs.debug}}"
 
       - name: run test
-        if: ${{ inputs.debug == 'false' }}
+        if: ${{ github.event.inputs.debug == 'false' || github.event.inputs.debug == ''}}
         run: echo "RUN normal"
       
       - name: run test (DEBUG)
-        if: ${{ inputs.debug == 'true'}}
+        if: ${{ github.event.inputs.debug == 'true'}}
         run: echo "RUN with DEBUG"
     
 
