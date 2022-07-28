@@ -33,8 +33,17 @@ jobs:
       - name: run test (DEBUG)
         if: ${{ github.event.inputs.debug == 'true' || inputs.debug == 'true' }}
         run: echo "RUN with DEBUG"
-    
 
+
+      - name: cache text file
+        id: cache-file
+        uses: actions/cache@v3
+        with:
+          path: ./file.txt
+          key: data
+    
+      - name: read text file
+        run: cat file.txt
 
 
 

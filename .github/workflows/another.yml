@@ -5,5 +5,18 @@ on: workflow_dispatch
 
 
 jobs:
+  Cache:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: create text file
+        run: echo "Sample text>"$(date +"%T") > file.txt
+      - name: cache text file
+        id: cache-file
+        uses: actions/cache@v3
+        with:
+          path: ./file.txt
+          key: data
   Test:
+    needs: [Cache]
     uses: ./.github/workflows/test.yml
