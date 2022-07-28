@@ -10,10 +10,13 @@ on:
         default: false
   workflow_call:
     inputs:
-      debug:
-        type: boolean
+      # debug:
+      #   type: boolean
+      #   required: false
+      #   default: false
+      cacheKey:
+        type: string
         required: false
-        default: false
 
 jobs:
 
@@ -23,24 +26,25 @@ jobs:
       - uses: actions/checkout@v3
 
 
-      - name: input value
-        run: echo "${{github.event.inputs.debug}} ;; ${{inputs.debug}}"
+      # - name: input value
+      #   run: echo "${{github.event.inputs.debug}} ;; ${{inputs.debug}}"
 
-      - name: run test
-        if: ${{ github.event.inputs.debug == 'false' || inputs.debug == 'false'}}
-        run: echo "RUN normal"
+      # - name: run test
+      #   if: ${{ github.event.inputs.debug == 'false' || inputs.debug == 'false'}}
+      #   run: echo "RUN normal"
       
-      - name: run test (DEBUG)
-        if: ${{ github.event.inputs.debug == 'true' || inputs.debug == 'true' }}
-        run: echo "RUN with DEBUG"
+      # - name: run test (DEBUG)
+      #   if: ${{ github.event.inputs.debug == 'true' || inputs.debug == 'true' }}
+      #   run: echo "RUN with DEBUG"
 
 
       - name: cache text file
+        if: ${{inputs.cacheKey}}
         id: cache-file
         uses: actions/cache@v3
         with:
           path: ./file.txt
-          key: data
+          key: ${{inputs.cacheKey}}
     
       - name: read text file
         run: cat file.txt

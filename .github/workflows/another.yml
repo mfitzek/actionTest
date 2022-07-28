@@ -1,7 +1,14 @@
 name: Fakt nevim
 
 
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        description: "SDK Release Version (e.g. v2.0.1)"
+        required: true
+        
 
 
 jobs:
@@ -16,7 +23,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ./file.txt
-          key: data
+          key: SDK-${{inputs.version}}-build
   Test:
     needs: [Cache]
     uses: ./.github/workflows/test.yml
+    with:
+      cacheKey: SDK-${{inputs.version}}-build
