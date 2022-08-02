@@ -14,6 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: echo "Commit and push" > hello.txt
-      - run: |
-          git commit -m "Test A $PUBLISHER"
-          git push
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Test app :${{ env.PUBLISHER }}"
