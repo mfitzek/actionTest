@@ -18,9 +18,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: echo "Hello cron! A" > hello.txt
-      - run: |
-          git commit -m "Test A $PUBLISHER"
-          git push
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Apply config version A (${{ env.PUBLISHER }})"
 
 
   testB:
@@ -29,6 +29,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: echo "Hello cron! B" > hello.txt
-      - run: |
-          git commit -m "Test B $PUBLISHER"
-          git push
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Apply config version B (${{ env.PUBLISHER }})"
