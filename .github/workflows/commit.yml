@@ -1,0 +1,19 @@
+name: "Cron test"
+
+
+on:
+  workflow_dispatch:
+
+env: 
+  PUBLISHER: 'appDfpTestMonitoring'
+
+jobs:
+
+  testA:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: echo "Commit and push" > hello.txt
+      - run: |
+          git commit -m "Test A $PUBLISHER"
+          git push

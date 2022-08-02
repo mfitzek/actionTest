@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0,30 * * * *'
-    - cron: '15,45 * * * *'
+    - cron: '*/10 * * * *'
 
 env: 
   PUBLISHER: 'appDfpTestMonitoring'
@@ -24,7 +24,7 @@ jobs:
 
 
   testB:
-    if: github.event.schedule == '15,45 * * * *'
+    if: github.event.schedule == '*/5 * * * *'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
