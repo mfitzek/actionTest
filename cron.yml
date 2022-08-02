@@ -1,0 +1,11 @@
+name: "Cron test"
+
+
+on:
+  schedule:
+    - cron: '* * * * *'
+
+jobs:
+  test:
+    steps:
+      -run: echo "Hello cron!"
