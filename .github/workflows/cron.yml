@@ -3,7 +3,7 @@ name: "Cron test"
 
 on:
   schedule:
-    - cron: '* * * * *'
+    - cron: '22 * * * *'
 
 jobs:
   test:
