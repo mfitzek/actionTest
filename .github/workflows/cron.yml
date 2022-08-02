@@ -6,16 +6,28 @@ on:
     - cron: '0,30 * * * *'
     - cron: '15,45 * * * *'
 
+env: 
+  PUBLISHER: 'appDfpTestMonitoring'
+
 jobs:
 
   testA:
     if: github.event.schedule == '0,30 * * * *'
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Hello cron! A"
+      - uses: actions/checkout@v3
+      - run: echo "Hello cron! A" > hello.txt
+      - run: |
+          git commit -m "Test A $PUBLISHER"
+          git push
+
 
   testB:
-    if: github.event.schedule == '0,30 * * * *'
+    if: github.event.schedule == '15,45 * * * *'
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Hello cron! B"
+      - uses: actions/checkout@v3
+      - run: echo "Hello cron! B" > hello.txt
+      - run: |
+          git commit -m "Test B $PUBLISHER"
+          git push
