@@ -3,10 +3,19 @@ name: "Cron test"
 
 on:
   schedule:
-    - cron: '0/10 * * * *'
+    - cron: '0,30 * * * *'
+    - cron: '15,45 * * * *'
 
 jobs:
-  test:
+
+  testA:
+    if: github.event.schedule == '0,30 * * * *'
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Hello cron!"
+      - run: echo "Hello cron! A"
+
+  testB:
+    if: github.event.schedule == '0,30 * * * *'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello cron! B"
